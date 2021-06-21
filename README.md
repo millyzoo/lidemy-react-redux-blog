@@ -1,8 +1,8 @@
-## React Blog
+## React-Redux Blog
 
 使用 [Create React App](https://github.com/facebook/create-react-app) 開發，並串接 [Lidemy API](https://github.com/Lidemy/lidemy-student-json-api-server) 的 SPA Blog。
 
-☞ [DEMO](https://milyzoo.github.io/lidemy-react-blog/)
+☞ [DEMO](https://milyzoo.github.io/lidemy-react-redux-blog/)
 
 ![](images/screenshots-main.png)
 
@@ -18,8 +18,10 @@
 
 ## 使用技術
 
-- 以 React 開發，搭配 React-router 處理前端路由，實現 Single-page application
-- 使用 function component 並導入 Hooks 來管理組件狀態
+- 以 React 開發，搭配 Redux 及 React-router
+- 使用 function component 並搭配 Hooks
+- 使用 Redux + Redux Toolkit 管理組件狀態
+- 使用 React-router 處理前端路由
 - 支援 RWD，使用 styled-components 進行排版
 - 搭配 Prettier、ESLint 統一程式碼格式
 
@@ -58,7 +60,7 @@
 首先將專案下載至本機端。
 
 ```
-$ git clone https://github.com/milyzoo/lidemy-react-blog.git
+$ git clone https://github.com/milyzoo/lidemy-react-redux-blog.git
 ```
 
 ### 安裝套件
@@ -72,5 +74,5 @@ $ npm install
 啟動後，可於任一瀏覽器以 http://localhost:3000 進行結果預覽。
 
 ```
-$ yarn start
+$ npm start
 ```
