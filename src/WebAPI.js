@@ -1,22 +1,22 @@
 import { getAuthToken } from "./utils";
 
-const BASE_URL = "https://student-json-api.lidemy.me";
+const BASE_URL = "https://lidemy-blog-json-server.herokuapp.com";
 
 export const getSingleArticle = (id) => {
-  return fetch(`${BASE_URL}/posts/${id}?_expand=user`).then((res) =>
+  return fetch(`${BASE_URL}/articles/${id}?_expand=user`).then((res) =>
     res.json()
   );
 };
 
 export const getArticles = (pageNumber, limitNumber) => {
   return fetch(
-    `${BASE_URL}/posts?_sort=createdAt&_order=desc&_expand=user&_page=${pageNumber}&_limit=${limitNumber}`
+    `${BASE_URL}/articles?_sort=createdAt&_order=desc&_expand=user&_page=${pageNumber}&_limit=${limitNumber}`
   );
 };
 
 export const getAuthorArticles = (userId) => {
   return fetch(
-    `${BASE_URL}/posts?userId=${userId}&_sort=createdAt&_order=desc&_expand=user`
+    `${BASE_URL}/articles?userId=${userId}&_sort=createdAt&_order=desc&_expand=user`
   ).then((res) => res.json());
 };
 
@@ -60,7 +60,7 @@ export const register = (username, password, nickname) => {
 export const addArticle = (title, content) => {
   const token = getAuthToken();
 
-  return fetch(`${BASE_URL}/posts`, {
+  return fetch(`${BASE_URL}/articles`, {
     method: "POST",
     headers: {
       authorization: `Bearer ${token}`,
@@ -76,7 +76,7 @@ export const addArticle = (title, content) => {
 export const updateArticle = (id, title, content) => {
   const token = getAuthToken();
 
-  return fetch(`${BASE_URL}/posts/${id}`, {
+  return fetch(`${BASE_URL}/articles/${id}`, {
     method: "PATCH",
     headers: {
       authorization: `Bearer ${token}`,
@@ -90,7 +90,7 @@ export const updateArticle = (id, title, content) => {
 };
 
 export const deleteArticle = (id) => {
-  return fetch(`${BASE_URL}/posts/${id}`, {
+  return fetch(`${BASE_URL}/articles/${id}`, {
     method: "DELETE",
   }).then((res) => res.json());
 };
