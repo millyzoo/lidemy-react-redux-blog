@@ -57,7 +57,7 @@ export const register = (username, password, nickname) => {
   }).then((res) => res.json());
 };
 
-export const addArticle = (title, category, content) => {
+export const addArticle = (title, category, coverImage, content) => {
   const token = getAuthToken();
 
   return fetch(`${BASE_URL}/articles`, {
@@ -69,12 +69,13 @@ export const addArticle = (title, category, content) => {
     body: JSON.stringify({
       title,
       category,
+      coverImage,
       body: content,
     }),
   }).then((res) => res.json());
 };
 
-export const updateArticle = (id, title, category, content) => {
+export const updateArticle = (id, title, category, coverImage, content) => {
   const token = getAuthToken();
 
   return fetch(`${BASE_URL}/articles/${id}`, {
@@ -86,6 +87,7 @@ export const updateArticle = (id, title, category, content) => {
     body: JSON.stringify({
       title,
       category,
+      coverImage,
       body: content,
     }),
   }).then((res) => res.json());

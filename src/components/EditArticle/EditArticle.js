@@ -22,10 +22,34 @@ const Title = styled.p`
   }
 `;
 
-const TitleInput = styled.input`
+const CategoryTitleContainer = styled.div`
+  display: flex;
   margin-bottom: 20px;
-  padding: 10px;
   width: 100%;
+`;
+
+const Category = styled.select`
+  margin-right: 15px;
+  padding: 10px;
+  width: 150px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  color: ${({ theme }) => theme.text.primary};
+  background-color: ${({ theme }) => theme.background.primary};
+  box-shadow: ${({ theme }) => theme.boxShadow.primary};
+
+  ${MEDIA_QUERY_SM} {
+    width: 100px;
+  }
+`;
+
+const CategoryOption = styled.option`
+  width: 100%;
+`;
+
+const TitleInput = styled.input`
+  padding: 10px;
+  width: calc(100% - 165px);
   border: 1px solid transparent;
   border-radius: 3px;
   color: ${({ theme }) => theme.text.primary};
@@ -36,24 +60,14 @@ const TitleInput = styled.input`
   &:focus {
     border: 1px solid ${({ theme }) => theme.primary};
   }
+
+  ${MEDIA_QUERY_SM} {
+    width: calc(100% - 115px);
+  }
 `;
 
-const CategoryContainer = styled.div`
+const CoverImageInput = styled(TitleInput)`
   margin-bottom: 20px;
-  width: 100%;
-`;
-
-const Category = styled.select`
-  padding: 10px;
-  width: 100%;
-  border: 1px solid transparent;
-  border-radius: 3px;
-  color: ${({ theme }) => theme.text.primary};
-  background-color: ${({ theme }) => theme.background.primary};
-  box-shadow: ${({ theme }) => theme.boxShadow.primary};
-`;
-
-const CategoryOption = styled.option`
   width: 100%;
 `;
 
@@ -121,45 +135,62 @@ export default function EditArticle({
   handleSubmit,
   errorMessage,
   setErrorMessage,
-  defaultCategory,
-  setDefaultCategory,
+  currectCategory,
+  setCurrectCategory,
+  coverImage,
+  setCoverImage,
   articleCategories,
 }) {
   const dispatch = useDispatch();
 
   const handleInputChange = (e) => {
     dispatch(setErrorMessage(null));
-    if (e.target.name === "title") {
-      setArticleTitle(e.target.value);
-    }
-    if (e.target.name === "content") {
-      setArticleContent(e.target.value);
+
+    switch (e.target.name) {
+      case "title":
+        setArticleTitle(e.target.value);
+        break;
+      case "content":
+        setArticleContent(e.target.value);
+        break;
+      case "cover":
+        setCoverImage(e.target.value);
+        break;
+      default:
+        break;
     }
   };
 
   const handleCategoryChange = (e) => {
-    setDefaultCategory(e.target.value);
+    setCurrectCategory(e.target.value);
   };
 
   return (
     <AddArticleForm onSubmit={handleSubmit}>
       <Title>{pageTitle}</Title>
-      <TitleInput
-        type="text"
-        name="title"
-        placeholder="請輸入文章標題"
-        value={articleTitle}
-        onChange={handleInputChange}
-      />
-      <CategoryContainer>
-        <Category value={defaultCategory} onChange={handleCategoryChange}>
+      <CategoryTitleContainer>
+        <Category value={currectCategory} onChange={handleCategoryChange}>
           {articleCategories.map((categories) => (
             <CategoryOption key={categories.id} value={categories.name}>
               {categories.name}
             </CategoryOption>
           ))}
         </Category>
-      </CategoryContainer>
+        <TitleInput
+          type="text"
+          name="title"
+          placeholder="文章標題"
+          value={articleTitle}
+          onChange={handleInputChange}
+        />
+      </CategoryTitleContainer>
+      <CoverImageInput
+        type="text"
+        name="cover"
+        placeholder="封面圖片網址，http://...."
+        value={coverImage}
+        onChange={handleInputChange}
+      />
       <ContentTextarea
         type="text"
         name="content"
@@ -184,7 +215,9 @@ EditArticle.propTypes = {
   handleSubmit: PropTypes.func,
   errorMessage: PropTypes.string,
   setErrorMessage: PropTypes.func,
-  defaultCategory: PropTypes.string,
-  setDefaultCategory: PropTypes.func,
+  currectCategory: PropTypes.string,
+  setCurrectCategory: PropTypes.func,
+  coverImage: PropTypes.string,
+  setCoverImage: PropTypes.func,
   articleCategories: PropTypes.array,
 };

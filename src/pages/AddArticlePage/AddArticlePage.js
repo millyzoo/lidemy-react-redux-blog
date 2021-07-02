@@ -18,7 +18,8 @@ export default function AddPostPage() {
   const [articleTitle, setArticleTitle] = useState("");
   const [articleContent, setArticleContent] = useState("");
   const [articleCategories, setArticleCategories] = useState([]);
-  const [defaultCategory, setDefaultCategory] = useState("");
+  const [currectCategory, setCurrectCategory] = useState("");
+  const [coverImage, setCoverImage] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
   const addArticleResponse = useSelector(selectAddArticleResponse);
@@ -37,7 +38,9 @@ export default function AddPostPage() {
     if (!articleTitle || !articleContent) {
       return dispatch(setErrorMessage("文章標題或內容尚未填寫齊全"));
     }
-    dispatch(addArticle(articleTitle, defaultCategory, articleContent));
+    dispatch(
+      addArticle(articleTitle, currectCategory, coverImage, articleContent)
+    );
   };
 
   useEffect(() => {
@@ -53,7 +56,7 @@ export default function AddPostPage() {
 
     getCategories().then((res) => {
       setArticleCategories(res);
-      setDefaultCategory(res[0].name)
+      setCurrectCategory(res[0].name);
     });
   }, [addArticleResponse, history, dispatch]);
 
@@ -69,8 +72,10 @@ export default function AddPostPage() {
           handleSubmit={handleSubmit}
           errorMessage={errorMessage}
           setErrorMessage={setErrorMessage}
-          defaultCategory={defaultCategory}
-          setDefaultCategory={setDefaultCategory}
+          currectCategory={currectCategory}
+          setCurrectCategory={setCurrectCategory}
+          coverImage={coverImage}
+          setCoverImage={setCoverImage}
           articleCategories={articleCategories}
         />
       </Container>

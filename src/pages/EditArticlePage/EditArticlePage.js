@@ -19,8 +19,9 @@ import { getCategories } from "../../WebAPI";
 export default function AddPostPage() {
   const [articleTitle, setArticleTitle] = useState("");
   const [articleContent, setArticleContent] = useState("");
-  const [defaultCategory, setDefaultCategory] = useState("");
   const [articleCategories, setArticleCategories] = useState([]);
+  const [currectCategory, setCurrectCategory] = useState("");
+  const [coverImage, setCoverImage] = useState("");
 
   let { id } = useParams();
   const history = useHistory();
@@ -42,7 +43,8 @@ export default function AddPostPage() {
     dispatch(getSingleArticle(id)).then((article) => {
       setArticleTitle(article.title);
       setArticleContent(article.body);
-      setDefaultCategory(article.category);
+      setCurrectCategory(article.category);
+      setCoverImage(article.coverImage);
     });
 
     getCategories().then((res) => {
@@ -55,12 +57,16 @@ export default function AddPostPage() {
     if (!articleTitle || !articleContent) {
       return dispatch(setErrorMessage("文章標題或內容尚未填寫齊全"));
     }
-    updateArticle(id, articleTitle, defaultCategory, articleContent).then(
-      (data) => {
-        if (!data.id) return;
-        history.push(`/articles/${id}`);
-      }
-    );
+    updateArticle(
+      id,
+      articleTitle,
+      currectCategory,
+      coverImage,
+      articleContent
+    ).then((data) => {
+      if (!data.id) return;
+      history.push(`/articles/${id}`);
+    });
   };
 
   return (
@@ -76,8 +82,10 @@ export default function AddPostPage() {
           handleSubmit={handleSubmit}
           errorMessage={errorMessage}
           setErrorMessage={setErrorMessage}
-          defaultCategory={defaultCategory}
-          setDefaultCategory={setDefaultCategory}
+          currectCategory={currectCategory}
+          setCurrectCategory={setCurrectCategory}
+          coverImage={coverImage}
+          setCoverImage={setCoverImage}
           articleCategories={articleCategories}
         />
       </Container>
