@@ -141,7 +141,7 @@ const NavItem = styled(Link)`
   position: relative;
   width: fit-content;
   text-decoration: none;
-  font-size: 30px;
+  font-size: 24px;
   color: #eff2f5;
 
   & + & {
@@ -154,7 +154,7 @@ const NavItem = styled(Link)`
     left: 50%;
     content: "";
     width: 0;
-    height: 2px;
+    height: 1px;
     background: rgba(255, 255, 255, 0.7);
     transition: 0.5s;
   }
@@ -178,7 +178,7 @@ const NavLogout = styled.div`
   margin-top: 40px;
   width: fit-content;
   text-decoration: none;
-  font-size: 30px;
+  font-size: 24px;
   color: #eff2f5;
   cursor: pointer;
 
@@ -188,7 +188,7 @@ const NavLogout = styled.div`
     left: 50%;
     content: "";
     width: 0;
-    height: 2px;
+    height: 1px;
     background: rgba(255, 255, 255, 0.7);
     transition: 0.3s;
   }
@@ -200,6 +200,7 @@ const NavLogout = styled.div`
 
   ${MEDIA_QUERY_SM} {
     margin-top: 30px;
+    font-size: 30px;
   }
 `;
 
@@ -247,27 +248,27 @@ export default function Header() {
         <CloseButton onClick={handleMenuClick} />
         <NavbarList>
           <NavItem onClick={handleMenuClick} to="/" replace>
-            Home
+            首頁
           </NavItem>
           <NavItem onClick={handleMenuClick} to="/articles" replace>
-            Articles
+            文章列表
           </NavItem>
           {user && (
             <NavItem onClick={handleMenuClick} to="/add-article" replace>
-              Add Article
+              新增文章
             </NavItem>
           )}
-          {!user && (
+          {/* {!user && (
             <NavItem onClick={handleMenuClick} to="/register" replace>
-              Register
+              註冊
             </NavItem>
-          )}
+          )} */}
           {!user && (
             <NavItem onClick={handleMenuClick} to="/login" replace>
-              Login
+              登入會員
             </NavItem>
           )}
-          {user && <NavLogout onClick={handleLogout}>Logout</NavLogout>}
+          {user && <NavLogout onClick={handleLogout}>登出</NavLogout>}
           <Toggler />
         </NavbarList>
       </NavbarContainer>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import {
   AiOutlineCalendar as CalendarIcon,
   AiOutlineUser as PersonIcon,
+  AiOutlineFolder as FolderIcon,
 } from "react-icons/ai";
 import PropTypes from "prop-types";
 
@@ -89,7 +90,7 @@ const ArticleDate = styled.div`
   }
 `;
 
-const ArticleAuthor = styled.div`
+const ArticleInfoLink = styled.div`
   display: flex;
   align-items: center;
   margin-left: 30px;
@@ -110,7 +111,7 @@ const Author = styled(Link)`
   }
 `;
 
-export default function Article({ article }) {
+export default function Article({ article, showAuthor }) {
   return (
     <ArticleItem>
       <ArticleTitle to={`/articles/${article.id}`}>
@@ -128,13 +129,19 @@ export default function Article({ article }) {
             <CalendarIcon />
             {new Date(article.createdAt).toLocaleDateString()}
           </ArticleDate>
-          {article.user && (
-            <ArticleAuthor>
+          <ArticleInfoLink>
+            <FolderIcon />
+            <Author to={`/author/${article.user.id}`}>
+              {article.category}
+            </Author>
+          </ArticleInfoLink>
+          {showAuthor && article.user && (
+            <ArticleInfoLink>
               <PersonIcon />
               <Author to={`/author/${article.user.id}`}>
                 {article.user.nickname}
               </Author>
-            </ArticleAuthor>
+            </ArticleInfoLink>
           )}
         </ArticleInfo>
       </ArticleFooter>
@@ -144,4 +151,5 @@ export default function Article({ article }) {
 
 Article.propTypes = {
   article: PropTypes.object,
+  showAuthor: PropTypes.bool,
 };

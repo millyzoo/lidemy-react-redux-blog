@@ -47,8 +47,10 @@ export const login = (username, password) => (dispatch) => {
 
     if (response.ok === 0) {
       // 錯誤處理
-      return dispatch(setErrorMessage(response.message)); // 登入失敗時就回傳錯誤訊息
+      dispatch(setErrorMessage(response.message)); // 登入失敗時就回傳錯誤訊息
+      return false
     }
+
     setAuthToken(response.token);
     dispatch(getUser());
     return response;

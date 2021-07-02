@@ -163,7 +163,7 @@ export default function HomePage() {
       <Container>
         <ArticlesHead>
           {articles.map((article) => (
-            <Article key={article.id} article={article} />
+            <Article key={article.id} article={article} showAuthor={false} />
           ))}
         </ArticlesHead>
       </Container>

@@ -22,6 +22,7 @@ export const themes = {
     },
     button: {
       menu: "#fff",
+      loginRegister: "#f3f3f3",
       submit: "#303030",
       modify: "#0051c3",
       modifyBorder: "#ccc",
@@ -55,6 +56,7 @@ export const themes = {
     },
     button: {
       menu: "#fff",
+      loginRegister: "rgba(207, 224, 241, 0.02)",
       submit: "#CFE0F1",
       modify: "#999",
     },

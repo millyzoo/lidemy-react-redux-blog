@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { MEDIA_QUERY_SM } from "../../constants/breakpoint";
 import { Wrapper, Container } from "../../layout/mainLayout";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import {
   AiFillEye as VisibilityIcon,
   AiFillEyeInvisible as VisibilityOffIcon,
@@ -10,27 +10,51 @@ import {
 import { register } from "../../redux/reducers/userReducer";
 import { useDispatch } from "react-redux";
 
+const FormContainer = styled.div`
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: ${({ theme }) => theme.boxShadow.primary};
+`;
+
+const FormToggle = styled.div`
+  display: flex;
+  text-align: center;
+
+  ${MEDIA_QUERY_SM} {
+    margin-top: 20px;
+  }
+`;
+
+const RegisterButton = styled.div`
+  padding: 15px 0;
+  width: 50%;
+  border-radius: 0 10px 0 0;
+  background-color: ${({ theme }) => theme.background.primary};
+  color: ${({ theme }) => theme.button.submit};
+`;
+
+const LoginButton = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  border-radius: 10px 0 0 0;
+  background-color: ${({ theme }) => theme.button.loginRegister};
+  color: ${({ theme }) => theme.button.submit};
+  text-decoration: none;
+`;
+
 const RegisterForm = styled.form`
   position: relative;
   margin: 0 auto;
   width: 100%;
   border-radius: 3px;
   padding: 40px 40px 50px 40px;
-  max-width: 400px;
   background-color: ${({ theme }) => theme.background.primary};
-  box-shadow: ${({ theme }) => theme.boxShadow.primary};
 
   ${MEDIA_QUERY_SM} {
-    margin-top: 20px;
     padding: 30px 30px 40px 30px;
   }
-`;
-
-const Title = styled.p`
-  margin-bottom: 20px;
-  text-align: center;
-  font-size: 24px;
-  color: ${({ theme }) => theme.button.submit};
 `;
 
 const InputContainer = styled.div`
@@ -146,38 +170,43 @@ export default function RegisterPage() {
   return (
     <Wrapper>
       <Container>
-        <RegisterForm onSubmit={handleSubmit}>
-          <Title>註冊會員</Title>
-          <InputField
-            type="text"
-            name="username"
-            value={username}
-            placeholder="帳號"
-            onChange={handleInputChange}
-          />
-          <InputField
-            type="text"
-            name="nickname"
-            value={nickname}
-            placeholder="暱稱"
-            onChange={handleInputChange}
-          />
-          <InputContainer>
-            <PasswordInputField
-              type={isPasswordShow ? "text" : "password"}
-              name="password"
-              value={"Lidemy"}
-              placeholder="密碼"
+        <FormContainer>
+          <FormToggle>
+            <LoginButton to="/login">登入</LoginButton>
+            <RegisterButton>註冊</RegisterButton>
+          </FormToggle>
+          <RegisterForm onSubmit={handleSubmit}>
+            <InputField
+              type="text"
+              name="username"
+              value={username}
+              placeholder="帳號"
               onChange={handleInputChange}
             />
-            <ShowPasswordIcon onClick={handlePasswordShow}>
-              {isPasswordShow ? <VisibilityIcon /> : <VisibilityOffIcon />}
-            </ShowPasswordIcon>
-          </InputContainer>
-          <RemindMessage>為了進行測試，密碼設定皆為默認值</RemindMessage>
-          <SubmitButton>註冊</SubmitButton>
-          {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
-        </RegisterForm>
+            <InputField
+              type="text"
+              name="nickname"
+              value={nickname}
+              placeholder="暱稱"
+              onChange={handleInputChange}
+            />
+            <InputContainer>
+              <PasswordInputField
+                type={isPasswordShow ? "text" : "password"}
+                name="password"
+                value={"Lidemy"}
+                placeholder="密碼"
+                onChange={handleInputChange}
+              />
+              <ShowPasswordIcon onClick={handlePasswordShow}>
+                {isPasswordShow ? <VisibilityIcon /> : <VisibilityOffIcon />}
+              </ShowPasswordIcon>
+            </InputContainer>
+            <RemindMessage>為了進行測試，密碼設定皆為默認值</RemindMessage>
+            <SubmitButton>註冊</SubmitButton>
+            {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
+          </RegisterForm>
+        </FormContainer>
       </Container>
     </Wrapper>
   );

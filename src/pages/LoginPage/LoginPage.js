@@ -15,27 +15,50 @@ import {
 } from "react-icons/ai";
 import { FaUser as PersonIcon, FaLock as LockIcon } from "react-icons/fa";
 
-const LoginForm = styled.form`
-  position: relative;
-  margin: 0 auto;
-  padding: 40px 40px 50px 40px;
-  width: 100%;
+const FormContainer = styled.div`
   max-width: 400px;
-  border-radius: 10px;
-  background-color: ${({ theme }) => theme.background.primary};
+  margin: 0 auto;
   box-shadow: ${({ theme }) => theme.boxShadow.primary};
+`;
+
+const FormToggle = styled.div`
+  display: flex;
+  text-align: center;
 
   ${MEDIA_QUERY_SM} {
-    margin-top: 30px;
-    padding: 30px 30px 40px 30px;
+    margin-top: 20px;
   }
 `;
 
-const Title = styled.p`
-  margin-bottom: 20px;
-  text-align: center;
-  font-size: 24px;
+const LoginButton = styled.div`
+  padding: 15px 0;
+  width: 50%;
+  border-radius: 10px 0 0 0;
+  background-color: ${({ theme }) => theme.background.primary};
   color: ${({ theme }) => theme.button.submit};
+`;
+
+const RegisterButton = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  border-radius: 0 10px 0 0;
+  background-color: ${({ theme }) => theme.button.loginRegister};
+  color: ${({ theme }) => theme.button.submit};
+  text-decoration: none;
+`;
+
+const LoginForm = styled.form`
+  position: relative;
+  padding: 40px 40px 50px 40px;
+  width: 100%;
+  border-radius: 0 0 10px 10;
+  background-color: ${({ theme }) => theme.background.primary};
+
+  ${MEDIA_QUERY_SM} {
+    padding: 30px 30px 40px 30px;
+  }
 `;
 
 const InputContainer = styled.div`
@@ -86,16 +109,10 @@ const PasswordInputField = styled(InputField)`
   padding: 5px 40px 5px 40px;
 `;
 
-const RegisterLink = styled(Link)`
-  display: inline-block;
-  margin-bottom: 20px;
-  text-decoration: none;
+const RemindMessage = styled.p`
+  margin: 0px 0 20px 0;
   color: ${({ theme }) => theme.text.remind};
-  transition: 0.3s;
-
-  &:hover {
-    color: ${({ theme }) => theme.primary};
-  }
+  font-size: 15px;
 `;
 
 const SubmitButton = styled.button`
@@ -161,35 +178,40 @@ export default function LoginPage() {
   return (
     <Wrapper>
       <Container>
-        <LoginForm onSubmit={handleSubmit}>
-          <Title>登入</Title>
-          <InputContainer>
-            <PersonIcon />
-            <InputField
-              type="text"
-              name="username"
-              value={username}
-              placeholder="帳號"
-              onChange={handleInputChange}
-            />
-          </InputContainer>
-          <InputContainer>
-            <LockIcon />
-            <PasswordInputField
-              type={isPasswordShow ? "text" : "password"}
-              name="password"
-              value={password}
-              placeholder="密碼"
-              onChange={handleInputChange}
-            />
-            <ShowPasswordIcon onClick={handlePasswordShow}>
-              {isPasswordShow ? <VisibilityIcon /> : <VisibilityOffIcon />}
-            </ShowPasswordIcon>
-          </InputContainer>
-          <RegisterLink to="/register">還沒有帳號嗎？按此註冊</RegisterLink>
-          <SubmitButton>登入</SubmitButton>
-          {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
-        </LoginForm>
+        <FormContainer>
+          <FormToggle>
+            <LoginButton>登入</LoginButton>
+            <RegisterButton to="/register">註冊</RegisterButton>
+          </FormToggle>
+          <LoginForm onSubmit={handleSubmit}>
+            <InputContainer>
+              <PersonIcon />
+              <InputField
+                type="text"
+                name="username"
+                value={username}
+                placeholder="帳號"
+                onChange={handleInputChange}
+              />
+            </InputContainer>
+            <InputContainer>
+              <LockIcon />
+              <PasswordInputField
+                type={isPasswordShow ? "text" : "password"}
+                name="password"
+                value={password}
+                placeholder="密碼"
+                onChange={handleInputChange}
+              />
+              <ShowPasswordIcon onClick={handlePasswordShow}>
+                {isPasswordShow ? <VisibilityIcon /> : <VisibilityOffIcon />}
+              </ShowPasswordIcon>
+            </InputContainer>
+            <RemindMessage>為了進行測試，密碼設定皆為默認值</RemindMessage>
+            <SubmitButton>登入</SubmitButton>
+            {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
+          </LoginForm>
+        </FormContainer>
       </Container>
     </Wrapper>
   );

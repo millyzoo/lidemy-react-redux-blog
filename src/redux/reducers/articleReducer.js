@@ -122,9 +122,9 @@ export const getSingleArticle = (id) => async (dispatch) => {
   }
 };
 
-export const addArticle = (title, content) => async (dispatch) => {
+export const addArticle = (title, content, categoryId) => async (dispatch) => {
   try {
-    const article = await addArticleAPI(title, content);
+    const article = await addArticleAPI(title, content, categoryId);
     dispatch(setAddArticleResponse(article));
     dispatch(setErrorMessage(null));
   } catch (error) {

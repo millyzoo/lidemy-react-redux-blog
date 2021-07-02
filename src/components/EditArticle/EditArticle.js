@@ -38,6 +38,25 @@ const TitleInput = styled.input`
   }
 `;
 
+const CategoryContainer = styled.div`
+  margin-bottom: 20px;
+  width: 100%;
+`;
+
+const Category = styled.select`
+  padding: 10px;
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  color: ${({ theme }) => theme.text.primary};
+  background-color: ${({ theme }) => theme.background.primary};
+  box-shadow: ${({ theme }) => theme.boxShadow.primary};
+`;
+
+const CategoryOption = styled.option`
+  width: 100%;
+`;
+
 const ContentTextarea = styled.textarea`
   margin-bottom: 20px;
   padding: 10px;
@@ -102,6 +121,9 @@ export default function EditArticle({
   handleSubmit,
   errorMessage,
   setErrorMessage,
+  defaultCategory,
+  setDefaultCategory,
+  articleCategories,
 }) {
   const dispatch = useDispatch();
 
@@ -115,6 +137,10 @@ export default function EditArticle({
     }
   };
 
+  const handleCategoryChange = (e) => {
+    setDefaultCategory(e.target.value);
+  };
+
   return (
     <AddArticleForm onSubmit={handleSubmit}>
       <Title>{pageTitle}</Title>
@@ -125,6 +151,15 @@ export default function EditArticle({
         value={articleTitle}
         onChange={handleInputChange}
       />
+      <CategoryContainer>
+        <Category value={defaultCategory} onChange={handleCategoryChange}>
+          {articleCategories.map((categories) => (
+            <CategoryOption key={categories.id} value={categories.name}>
+              {categories.name}
+            </CategoryOption>
+          ))}
+        </Category>
+      </CategoryContainer>
       <ContentTextarea
         type="text"
         name="content"
@@ -149,4 +184,7 @@ EditArticle.propTypes = {
   handleSubmit: PropTypes.func,
   errorMessage: PropTypes.string,
   setErrorMessage: PropTypes.func,
+  defaultCategory: PropTypes.string,
+  setDefaultCategory: PropTypes.func,
+  articleCategories: PropTypes.array,
 };

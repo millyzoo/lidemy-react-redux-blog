@@ -14,10 +14,13 @@ import {
 } from "../../redux/reducers/articleReducer";
 import { selectUser } from "../../redux/reducers/userReducer";
 import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "../../WebAPI";
 
 export default function AddPostPage() {
   const [articleTitle, setArticleTitle] = useState("");
   const [articleContent, setArticleContent] = useState("");
+  const [defaultCategory, setDefaultCategory] = useState("");
+  const [articleCategories, setArticleCategories] = useState([]);
 
   let { id } = useParams();
   const history = useHistory();
@@ -39,6 +42,11 @@ export default function AddPostPage() {
     dispatch(getSingleArticle(id)).then((article) => {
       setArticleTitle(article.title);
       setArticleContent(article.body);
+      setDefaultCategory(article.category);
+    });
+
+    getCategories().then((res) => {
+      setArticleCategories(res);
     });
   }, [id, dispatch]);
 
@@ -47,10 +55,12 @@ export default function AddPostPage() {
     if (!articleTitle || !articleContent) {
       return dispatch(setErrorMessage("文章標題或內容尚未填寫齊全"));
     }
-    updateArticle(id, articleTitle, articleContent).then((data) => {
-      if (!data.id) return;
-      history.push(`/articles/${id}`);
-    });
+    updateArticle(id, articleTitle, defaultCategory, articleContent).then(
+      (data) => {
+        if (!data.id) return;
+        history.push(`/articles/${id}`);
+      }
+    );
   };
 
   return (
@@ -66,6 +76,9 @@ export default function AddPostPage() {
           handleSubmit={handleSubmit}
           errorMessage={errorMessage}
           setErrorMessage={setErrorMessage}
+          defaultCategory={defaultCategory}
+          setDefaultCategory={setDefaultCategory}
+          articleCategories={articleCategories}
         />
       </Container>
     </Wrapper>

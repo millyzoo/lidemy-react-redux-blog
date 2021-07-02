@@ -57,7 +57,7 @@ export const register = (username, password, nickname) => {
   }).then((res) => res.json());
 };
 
-export const addArticle = (title, content) => {
+export const addArticle = (title, category, content) => {
   const token = getAuthToken();
 
   return fetch(`${BASE_URL}/articles`, {
@@ -68,12 +68,13 @@ export const addArticle = (title, content) => {
     },
     body: JSON.stringify({
       title,
+      category,
       body: content,
     }),
   }).then((res) => res.json());
 };
 
-export const updateArticle = (id, title, content) => {
+export const updateArticle = (id, title, category, content) => {
   const token = getAuthToken();
 
   return fetch(`${BASE_URL}/articles/${id}`, {
@@ -84,6 +85,7 @@ export const updateArticle = (id, title, content) => {
     },
     body: JSON.stringify({
       title,
+      category,
       body: content,
     }),
   }).then((res) => res.json());
@@ -93,4 +95,8 @@ export const deleteArticle = (id) => {
   return fetch(`${BASE_URL}/articles/${id}`, {
     method: "DELETE",
   }).then((res) => res.json());
+};
+
+export const getCategories = () => {
+  return fetch(`${BASE_URL}/categories`).then((res) => res.json());
 };
