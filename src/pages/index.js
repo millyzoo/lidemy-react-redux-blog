@@ -4,6 +4,7 @@ import HomePage from "./HomePage";
 import ArticlesPage from "./ArticlesPage";
 import SingleArticlePage from "./SingleArticlePage";
 import AuthorPage from "./AuthorPage";
+import CategoryPage from "./CategoryPage";
 import AddArticlePage from "./AddArticlePage";
 import EditArticlePage from "./EditArticlePage";
 import SearchPage from "./SearchPage";
@@ -15,6 +16,7 @@ export {
   ArticlesPage,
   SingleArticlePage,
   AuthorPage,
+  CategoryPage,
   AddArticlePage,
   EditArticlePage,
   SearchPage

@@ -16,6 +16,7 @@ import {
   ArticlesPage,
   SingleArticlePage,
   AuthorPage,
+  CategoryPage,
   AddArticlePage,
   EditArticlePage,
   SearchPage,
@@ -58,6 +59,9 @@ function App() {
           </Route>
           <Route path="/author/:userId">
             <AuthorPage />
+          </Route>
+          <Route path="/category/:categoryName">
+            <CategoryPage />
           </Route>
           <Route path="/add-article">
             <AddArticlePage />

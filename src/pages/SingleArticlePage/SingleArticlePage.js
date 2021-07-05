@@ -124,7 +124,6 @@ const Author = styled(Link)`
 `;
 
 export default function SingleArticlePage() {
-  // const { user } = useContext(AuthContext);
   const { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();

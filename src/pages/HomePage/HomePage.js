@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   MEDIA_QUERY_SM,
@@ -9,11 +9,11 @@ import { Wrapper, Container } from "../../layout/mainLayout";
 import { ReactComponent as BannerImage } from "../../images/banner.svg";
 import Article from "../../components/Article/Article";
 import Loading from "../../components/Loading";
+import { getArticles } from "../../WebAPI";
 import {
-  getArticles,
   selectIsLoading,
-  selectArticles,
-} from "../../redux/reducers/articleReducer";
+  setIsLoading,
+} from "../../redux/reducers/isLoadingReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AiOutlineArrowRight as ArrowRight } from "react-icons/ai";
@@ -118,7 +118,7 @@ const ArticlesHead = styled.div`
     width: calc(50% - 15px);
   }
 
-  & > li:last-child {
+  & > li:nth-child(3) {
     width: 100%;
   }
 
@@ -136,14 +136,28 @@ const ArticlesHead = styled.div`
 `;
 
 export default function HomePage() {
+  const [articles, setArticles] = useState([]);
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
-  const articles = useSelector(selectArticles);
   const pageNumber = 1;
   const articlesLimit = 3;
 
   useEffect(() => {
-    dispatch(getArticles(pageNumber, articlesLimit));
+    dispatch(setIsLoading(true));
+
+    async function getAllArticles(pageNumber, articlesLimit) {
+      try {
+        const response = await getArticles(pageNumber, articlesLimit);
+        const data = await response.json();
+        setArticles(data);
+        dispatch(setIsLoading(false));
+      } catch (error) {
+        console.log("錯誤：" + error);
+        dispatch(setIsLoading(false));
+      }
+    }
+
+    getAllArticles(pageNumber, articlesLimit);
   }, [dispatch]);
 
   return (
@@ -154,7 +168,7 @@ export default function HomePage() {
           <h1>Lorem Ipsum</h1>
           <p>There are many variations of passages of Lorem Ipsum available.</p>
           <DescriptionButton to="/articles">
-            <span>全部文章</span>
+            <span>文章列表</span>
             <ArrowRight />
           </DescriptionButton>
         </Description>
@@ -163,7 +177,7 @@ export default function HomePage() {
       <Container>
         <ArticlesHead>
           {articles.map((article) => (
-            <Article key={article.id} article={article} showAuthor={false} />
+            <Article key={article.id} article={article} />
           ))}
         </ArticlesHead>
       </Container>

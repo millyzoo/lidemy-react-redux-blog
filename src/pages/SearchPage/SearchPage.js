@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { MEDIA_QUERY_SM } from "../../constants/breakpoint";
 import { Wrapper, Container, EmptyDataTitle } from "../../layout/mainLayout";
-import Article from "../../components/Article/Article";
+import ArticleFullVersion from "../../components/Article/ArticleFullVersion";
 import Loading from "../../components/Loading";
 import { getArticles } from "../../WebAPI";
 import { useParams } from "react-router-dom";
@@ -72,7 +72,11 @@ export default function SearchPage() {
         )}
 
         {articles.map((article) => (
-          <Article key={article.id} article={article} />
+          <ArticleFullVersion
+            key={article.id}
+            article={article}
+            hideCoverImage={!article.coverImage}
+          />
         ))}
       </Container>
     </Wrapper>

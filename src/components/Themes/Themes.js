@@ -5,6 +5,7 @@ export const themes = {
       primary: "#fff",
       searchBox: "#cfe0f1",
       opacity: "rgba(255, 255, 255, 0.3)",
+      category: "#E4E4E4",
     },
     primary: "#0051c3",
     text: {
@@ -39,6 +40,7 @@ export const themes = {
       primary: "#313B41",
       searchBox: "#9cbfe2",
       opacity: "rgba(207, 224, 241, 0.02)",
+      category: "#687f8e",
     },
     primary: "#82B1FF",
     text: {
@@ -56,7 +58,7 @@ export const themes = {
     },
     button: {
       menu: "#fff",
-      loginRegister: "rgba(207, 224, 241, 0.02)",
+      loginRegister: "#2c343a",
       submit: "#CFE0F1",
       modify: "#999",
     },

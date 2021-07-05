@@ -102,3 +102,19 @@ export const deleteArticle = (id) => {
 export const getCategories = () => {
   return fetch(`${BASE_URL}/categories`).then((res) => res.json());
 };
+
+export const getFilterCategories = (category) => {
+  return fetch(`${BASE_URL}/categories?name=${category}`).then((res) => res.json());
+};
+
+export const getCategoryArticles = (pageNumber, limitNumber, category) => {
+  return fetch(
+    `${BASE_URL}/articles?_sort=createdAt&_order=desc&_expand=user&_page=${pageNumber}&_limit=${limitNumber}&category=${category}`
+  );
+};
+
+export const getAllCategoryArticles = (category) => {
+  return fetch(
+    `${BASE_URL}/articles?_sort=createdAt&_order=desc&_expand=user&category=${category}`
+  ).then((res) => res.json());
+};

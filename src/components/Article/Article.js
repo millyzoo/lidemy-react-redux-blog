@@ -3,7 +3,6 @@ import { MEDIA_QUERY_SM } from "../../constants/breakpoint";
 import { Link } from "react-router-dom";
 import {
   AiOutlineCalendar as CalendarIcon,
-  AiOutlineUser as PersonIcon,
   AiOutlineFolder as FolderIcon,
 } from "react-icons/ai";
 import PropTypes from "prop-types";
@@ -111,7 +110,7 @@ const Author = styled(Link)`
   }
 `;
 
-export default function Article({ article, showAuthor }) {
+export default function Article({ article }) {
   return (
     <ArticleItem>
       <ArticleTitle to={`/articles/${article.id}`}>
@@ -131,18 +130,10 @@ export default function Article({ article, showAuthor }) {
           </ArticleDate>
           <ArticleInfoLink>
             <FolderIcon />
-            <Author to={`/author/${article.user.id}`}>
+            <Author to={`/category/${article.category}`}>
               {article.category}
             </Author>
           </ArticleInfoLink>
-          {showAuthor && article.user && (
-            <ArticleInfoLink>
-              <PersonIcon />
-              <Author to={`/author/${article.user.id}`}>
-                {article.user.nickname}
-              </Author>
-            </ArticleInfoLink>
-          )}
         </ArticleInfo>
       </ArticleFooter>
     </ArticleItem>

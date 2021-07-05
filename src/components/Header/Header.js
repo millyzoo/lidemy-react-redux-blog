@@ -5,7 +5,6 @@ import SearchBox from "../Search";
 import Toggler from "../Toggler";
 import { Link, useHistory } from "react-router-dom";
 import { setAuthToken } from "../../utils";
-import { useParams } from "react-router-dom";
 import { setUser, selectUser } from "../../redux/reducers/userReducer";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -217,7 +216,6 @@ const NavbarBackground = styled.div`
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  let { searchData } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
@@ -234,7 +232,7 @@ export default function Header() {
   return (
     <HeaderContainer>
       <Brand to="/" replace>
-        Blog{searchData}
+        Blog
       </Brand>
       <HeaderRight>
         <SearchBox />
@@ -258,14 +256,9 @@ export default function Header() {
               新增文章
             </NavItem>
           )}
-          {/* {!user && (
-            <NavItem onClick={handleMenuClick} to="/register" replace>
-              註冊
-            </NavItem>
-          )} */}
           {!user && (
             <NavItem onClick={handleMenuClick} to="/login" replace>
-              登入會員
+              會員登入
             </NavItem>
           )}
           {user && <NavLogout onClick={handleLogout}>登出</NavLogout>}

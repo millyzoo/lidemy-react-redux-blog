@@ -122,15 +122,21 @@ export const getSingleArticle = (id) => async (dispatch) => {
   }
 };
 
-export const addArticle = (title, content, coverImage, categoryId) => async (dispatch) => {
-  try {
-    const article = await addArticleAPI(title, content, coverImage, categoryId);
-    dispatch(setAddArticleResponse(article));
-    dispatch(setErrorMessage(null));
-  } catch (error) {
-    console.log("錯誤：" + error);
-  }
-};
+export const addArticle =
+  (title, content, coverImage, categoryId) => async (dispatch) => {
+    try {
+      const article = await addArticleAPI(
+        title,
+        content,
+        coverImage,
+        categoryId
+      );
+      dispatch(setAddArticleResponse(article));
+      dispatch(setErrorMessage(null));
+    } catch (error) {
+      console.log("錯誤：" + error);
+    }
+  };
 
 export const deleteArticle = (articleId) => () => {
   deleteArticleAPI(articleId).then((response) => {
