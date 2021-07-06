@@ -12,7 +12,9 @@ const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 auto;
   padding: 0 50px;
+  max-width: 1500px;
   height: 100px;
   box-sizing: border-box;
 
@@ -34,22 +36,22 @@ const HeaderRight = styled.div`
 `;
 
 const MenuTopLine = styled.span`
-  top: 17px;
+  top: 0;
 `;
 
 const MenuMiddleLine = styled.span`
-  top: 24px;
+  top: 8px;
 `;
 
 const MenuBottomLine = styled.span`
-  bottom: 17px;
+  bottom: 0;
 `;
 
 const HamburgerMenu = styled.div`
   position: relative;
-  margin-left: 20px;
-  width: 50px;
-  height: 50px;
+  margin-left: 25px;
+  width: 28px;
+  height: 18px;
   border-radius: 50%;
   cursor: pointer;
   transition: 0.3s;
@@ -58,7 +60,7 @@ const HamburgerMenu = styled.div`
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 25px;
+    width: 100%;
     height: 2px;
     background-color: ${({ theme }) => theme.primary};
     transition: 0.3s;
@@ -66,11 +68,11 @@ const HamburgerMenu = styled.div`
 
   &:hover {
     ${MenuTopLine} {
-      top: 15px;
+      top: -2px;
     }
 
     ${MenuBottomLine} {
-      bottom: 15px;
+      bottom: -2px;
     }
   }
 
@@ -90,7 +92,6 @@ const NavbarContainer = styled.div`
   align-items: center;
   z-index: 2;
   background-color: #0051c3;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
   transition: 0.5s;
   z-index: 100;
   transform: ${(props) =>

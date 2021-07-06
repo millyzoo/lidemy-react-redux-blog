@@ -1,6 +1,6 @@
 ## React-Redux Blog
 
-使用 [Create React App](https://github.com/facebook/create-react-app) 開發，並串接 [Lidemy API](https://github.com/Lidemy/lidemy-student-json-api-server) 的 SPA Blog。
+使用 [Create React App](https://github.com/facebook/create-react-app) 開發的 SPA Blog，並串接以 JSON server 建立的 [API](https://lidemy-blog-json-server.herokuapp.com) 。
 
 ☞ [DEMO](https://milyzoo.github.io/lidemy-react-redux-blog/)
 
@@ -29,9 +29,20 @@
 
 ### 會員機制
 
-由於此系統的密碼以明文儲存，所以會在後端統一將密碼設置成 Lidemy，因此每個使用者的密碼將會相同。
+由於此系統的密碼以明文儲存，所以會在後端統一設置密碼，因此每個使用者的密碼將會相同。
 
 ![](images/screenshots-login.png)
+
+### 文章管理
+
+![](images/screenshots-management-articles.png)
+
+### 文章篩選
+
+點擊文章分類，即可篩選出該分類所有文章。
+
+
+![](images/screenshots-filter-article.gif)
 
 ### 作者文章列表
 

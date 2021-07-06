@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { MEDIA_QUERY_SM } from "../../constants/breakpoint";
 import React, { useState, useEffect } from "react";
-import { Wrapper, Container } from "../../layout/mainLayout";
+import { Wrapper, Container, EmptyDataTitle } from "../../layout/mainLayout";
 import { getAuthorArticles, deleteArticle } from "../../WebAPI";
 import { getAuthToken } from "../../utils";
 import {
@@ -183,6 +183,7 @@ export default function ArticlePage() {
           <AddArticlesButton to="/add-article">新增文章</AddArticlesButton>
         </ManagementHeader>
         <ArticlesContainer>
+          {articles.length === 0 && <EmptyDataTitle>目前沒有文章。</EmptyDataTitle>}
           {articles.map((article) => (
             <Article key={article.id}>
               <ArticleInfo>

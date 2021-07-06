@@ -53,7 +53,7 @@ const LoginForm = styled.form`
   position: relative;
   padding: 40px 40px 50px 40px;
   width: 100%;
-  border-radius: 0 0 10px 10;
+  border-radius: 0 0 10px 10px;
   background-color: ${({ theme }) => theme.background.primary};
 
   ${MEDIA_QUERY_SM} {

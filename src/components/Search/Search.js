@@ -10,12 +10,13 @@ const SearchContainer = styled.form`
 `;
 
 const SearchBar = styled.input`
-  padding: 5px 10px 5px 15px;
-  width: 85px;
+  padding: 7px 10px 7px 15px;
+  width: 80px;
   background-color: ${({ theme }) => theme.background.searchBox};
   color: ${({ theme }) => theme.text.searchBox};
   border: transparent;
   border-radius: 20px 0 0 20px;
+
   &::placeholder {
     color: ${({ theme }) => theme.text.searchBox};
   }
@@ -30,6 +31,10 @@ const SearchButton = styled.button`
   border: transparent;
   border-radius: 0 20px 20px 0;
   cursor: pointer;
+
+  svg {
+    font-size: 15px;
+  }
 `;
 
 export default function SearchBox() {
