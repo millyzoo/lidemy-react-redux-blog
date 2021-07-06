@@ -133,7 +133,7 @@ const Author = styled(Link)`
 const ArticleCoverImage = styled(Link)`
   margin-left: 20px;
   width: 165px;
-  height: 100px;
+  height: 110px;
   background-color: #fff;
   overflow: hidden;
 
