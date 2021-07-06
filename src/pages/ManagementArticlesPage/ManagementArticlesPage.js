@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { MEDIA_QUERY_SM } from "../../constants/breakpoint";
 import React, { useState, useEffect } from "react";
 import { Wrapper, Container } from "../../layout/mainLayout";
-import { getAuthorArticles } from "../../WebAPI";
+import { getAuthorArticles, deleteArticle } from "../../WebAPI";
+import { getAuthToken } from "../../utils";
 import {
   selectIsLoading,
   setIsLoading,
 } from "../../redux/reducers/isLoadingReducer";
-import { deleteArticle } from "../../redux/reducers/articleReducer";
 import { selectUser } from "../../redux/reducers/userReducer";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../components/Loading";
@@ -35,6 +35,11 @@ const AddArticlesButton = styled(Link)`
   text-decoration: none;
   color: #ffffff;
   border-radius: 5px;
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.85;
+  }
 
   ${MEDIA_QUERY_SM} {
     margin-left: auto;
@@ -87,6 +92,11 @@ const ArticleTitle = styled(Link)`
   margin-left: 25px;
   text-decoration: none;
   color: ${({ theme }) => theme.text.primary};
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
 
   ${MEDIA_QUERY_SM} {
     margin-left: 0;
@@ -118,11 +128,21 @@ const EditArticleButton = styled(Link)`
   margin-right: 20px;
   color: ${({ theme }) => theme.primary};
   text-decoration: none;
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const DeleteArticleButton = styled.p`
   color: ${({ theme }) => theme.text.third};
   cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 export default function ArticlePage() {
@@ -131,8 +151,14 @@ export default function ArticlePage() {
   const [articles, setArticles] = useState([]);
   const isLoading = useSelector(selectIsLoading);
   const currentUser = useSelector(selectUser);
+  const user = useSelector(selectUser);
 
   useEffect(() => {
+    if (!getAuthToken() && !user) {
+      history.push("/login");
+      return;
+    } // 沒有登入就跳轉到登入頁面
+
     dispatch(setIsLoading(true));
     if (currentUser) {
       getAuthorArticles(currentUser.id).then((response) => {
@@ -140,15 +166,12 @@ export default function ArticlePage() {
         dispatch(setIsLoading(false));
       });
     }
-  }, [currentUser, dispatch]);
+  }, [user, history, currentUser, dispatch]);
 
   const handleArticleDelete = (e) => {
-    dispatch(deleteArticle(e.target.dataset.articleId));
-
-    setTimeout(() => {
+    deleteArticle(e.target.dataset.articleId).then(() => {
       history.go(0);
-    }, 500);
-    // 如果沒有加 setTimeout，跳轉頁面時，還是會抓到舊資料
+    });
   };
 
   return (

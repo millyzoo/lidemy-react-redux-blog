@@ -2,61 +2,57 @@ import React, { useState, useEffect } from "react";
 import Loading from "../../components/Loading";
 import EditArticle from "../../components/EditArticle";
 import { Wrapper, Container } from "../../layout/mainLayout";
-import { updateArticle } from "../../WebAPI";
+import { getSingleArticle, updateArticle } from "../../WebAPI";
 import { getAuthToken } from "../../utils";
 import { useHistory, useParams } from "react-router-dom";
 import {
-  setIsLoading,
-  getSingleArticle,
-  setErrorMessage,
   selectIsLoading,
-  selectErrorMessage,
-} from "../../redux/reducers/articleReducer";
+  setIsLoading,
+} from "../../redux/reducers/isLoadingReducer";
 import { selectUser } from "../../redux/reducers/userReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../WebAPI";
 
 export default function AddPostPage() {
-  const [articleTitle, setArticleTitle] = useState("");
-  const [articleContent, setArticleContent] = useState("");
   const [articleCategories, setArticleCategories] = useState([]);
+  const [articleTitle, setArticleTitle] = useState("");
   const [currectCategory, setCurrectCategory] = useState("");
   const [coverImage, setCoverImage] = useState("");
-
-  let { id } = useParams();
-  const history = useHistory();
+  const [articleContent, setArticleContent] = useState("");
+  const [errorMessage, setErrorMessage] = useState();
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
-  const errorMessage = useSelector(selectErrorMessage);
   const user = useSelector(selectUser);
-
-  if (!getAuthToken()) {
-    if (!user) {
-      // 沒有登入就跳轉到登入頁面
-      history.push("/login");
-    }
-  }
+  const history = useHistory();
+  let { id } = useParams();
 
   useEffect(() => {
+    if (!getAuthToken() && !user) {
+      history.push("/login");
+      return;
+    } // 沒有登入就跳轉到登入頁面
+
     dispatch(setIsLoading(true));
 
-    dispatch(getSingleArticle(id)).then((article) => {
+    getSingleArticle(id).then((article) => {
       setArticleTitle(article.title);
-      setArticleContent(article.body);
       setCurrectCategory(article.category);
       setCoverImage(article.coverImage);
+      setArticleContent(article.body);
+      dispatch(setIsLoading(false));
     });
 
     getCategories().then((res) => {
       setArticleCategories(res);
     });
-  }, [id, dispatch]);
+  }, [user, history, id, dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!articleTitle || !articleContent) {
-      return dispatch(setErrorMessage("文章標題或內容尚未填寫齊全"));
+      return setErrorMessage("文章標題或內容尚未填寫齊全");
     }
+
     updateArticle(
       id,
       articleTitle,
@@ -75,18 +71,18 @@ export default function AddPostPage() {
         {isLoading && <Loading />}
         <EditArticle
           pageTitle={"編輯文章"}
+          articleCategories={articleCategories}
           articleTitle={articleTitle}
           setArticleTitle={setArticleTitle}
+          currectCategory={currectCategory}
+          setCurrectCategory={setCurrectCategory}
+          coverImage={coverImage}
+          setCoverImage={setCoverImage}
           articleContent={articleContent}
           setArticleContent={setArticleContent}
           handleSubmit={handleSubmit}
           errorMessage={errorMessage}
           setErrorMessage={setErrorMessage}
-          currectCategory={currectCategory}
-          setCurrectCategory={setCurrectCategory}
-          coverImage={coverImage}
-          setCoverImage={setCoverImage}
-          articleCategories={articleCategories}
         />
       </Container>
     </Wrapper>

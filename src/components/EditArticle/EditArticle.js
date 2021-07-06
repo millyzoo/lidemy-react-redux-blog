@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { MEDIA_QUERY_SM } from "../../constants/breakpoint";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
 
 const AddArticleForm = styled.form`
   display: flex;
@@ -128,23 +127,21 @@ const ErrorText = styled.div`
 
 export default function EditArticle({
   pageTitle,
+  articleCategories,
   articleTitle,
   setArticleTitle,
+  currectCategory,
+  setCurrectCategory,
+  coverImage,
+  setCoverImage,
   articleContent,
   setArticleContent,
   handleSubmit,
   errorMessage,
   setErrorMessage,
-  currectCategory,
-  setCurrectCategory,
-  coverImage,
-  setCoverImage,
-  articleCategories,
 }) {
-  const dispatch = useDispatch();
-
   const handleInputChange = (e) => {
-    dispatch(setErrorMessage(null));
+    setErrorMessage(null);
 
     switch (e.target.name) {
       case "title":
@@ -208,16 +205,16 @@ export default function EditArticle({
 
 EditArticle.propTypes = {
   pageTitle: PropTypes.string,
+  articleCategories: PropTypes.array,
   articleTitle: PropTypes.string,
   setArticleTitle: PropTypes.func,
+  currectCategory: PropTypes.string,
+  setCurrectCategory: PropTypes.func,
+  coverImage: PropTypes.string,
+  setCoverImage: PropTypes.func,
   articleContent: PropTypes.string,
   setArticleContent: PropTypes.func,
   handleSubmit: PropTypes.func,
   errorMessage: PropTypes.string,
   setErrorMessage: PropTypes.func,
-  currectCategory: PropTypes.string,
-  setCurrectCategory: PropTypes.func,
-  coverImage: PropTypes.string,
-  setCoverImage: PropTypes.func,
-  articleCategories: PropTypes.array,
 };

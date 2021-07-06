@@ -1,14 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Wrapper, Container, EmptyDataTitle } from "../../layout/mainLayout";
 import Loading from "../../components/Loading";
+import { getSingleArticle, deleteArticle } from "../../WebAPI";
 import {
-  getSingleArticle,
-  deleteArticle,
   selectIsLoading,
-  selectArticle,
-  selectArticleAuthor,
-} from "../../redux/reducers/articleReducer";
+  setIsLoading,
+} from "../../redux/reducers/isLoadingReducer";
 import { selectUser } from "../../redux/reducers/userReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link, useParams } from "react-router-dom";
@@ -75,7 +73,7 @@ const ArticleContainer = styled.div`
 `;
 
 const ArticleTitle = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   font-size: 24px;
   font-weight: 500;
   color: ${({ theme }) => theme.text.primary};
@@ -83,7 +81,7 @@ const ArticleTitle = styled.div`
 
 const ArticleInfo = styled.div`
   display: flex;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 
   svg {
     margin-right: 3px;
@@ -91,11 +89,15 @@ const ArticleInfo = styled.div`
   }
 `;
 
+const ArticleCoverImage = styled.img`
+  margin-bottom: 15px;
+  max-width: 100%;
+`;
+
 const ArticleBody = styled.p`
   color: ${({ theme }) => theme.text.primary};
   white-space: pre-wrap;
   line-height: 1.5;
-  font-size: 17px;
   word-break: break-word;
 `;
 
@@ -124,24 +126,44 @@ const Author = styled(Link)`
 `;
 
 export default function SingleArticlePage() {
-  const { id } = useParams();
-  const history = useHistory();
-  const dispatch = useDispatch();
+  const [article, setArticle] = useState([]);
+  const [articleAuthor, setArticleAuthor] = useState([]);
   const isLoading = useSelector(selectIsLoading);
-  const article = useSelector(selectArticle);
-  const articleAuthor = useSelector(selectArticleAuthor);
+  const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const history = useHistory();
+  const { id } = useParams();
 
   useEffect(() => {
-    dispatch(getSingleArticle(id));
+    const getArticle = async (dispatch) => {
+      dispatch(setIsLoading(true));
+
+      try {
+        const article = await getSingleArticle(id);
+        const isEmptyArticle = Object.keys(article).length === 0;
+
+        if (isEmptyArticle) {
+          setArticle([]);
+          setArticleAuthor(null);
+        } else {
+          setArticle(article);
+          setArticleAuthor(article.user.username);
+        }
+        dispatch(setIsLoading(false));
+        return article;
+      } catch (error) {
+        console.log("錯誤：" + error);
+        dispatch(setIsLoading(false));
+      }
+    };
+
+    getArticle(dispatch);
   }, [id, dispatch]);
 
   const handleArticleDelete = () => {
-    dispatch(deleteArticle(id));
-    setTimeout(() => {
+    deleteArticle(id).then(() => {
       history.push("/articles");
-    }, 500);
-    // 如果沒有加 setTimeout 的話，跳轉到 /articles 頁面時，還是會抓到刪除文章前的資料
+    });
   };
 
   return (
@@ -179,6 +201,9 @@ export default function SingleArticlePage() {
                 </ArticleAuthor>
               )}
             </ArticleInfo>
+            {article.coverImage && (
+              <ArticleCoverImage src={article.coverImage} alt="Article Cover" />
+            )}
             <ArticleBody>{article.body}</ArticleBody>
           </ArticleContainer>
         )}
