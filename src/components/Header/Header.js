@@ -252,8 +252,8 @@ export default function Header() {
             文章列表
           </NavItem>
           {user && (
-            <NavItem onClick={handleMenuClick} to="/add-article" replace>
-              新增文章
+            <NavItem onClick={handleMenuClick} to="/management-articles" replace>
+              管理文章
             </NavItem>
           )}
           {!user && (

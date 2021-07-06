@@ -18,6 +18,7 @@ import {
   AuthorPage,
   CategoryPage,
   AddArticlePage,
+  ManagementArticlesPage,
   EditArticlePage,
   SearchPage,
 } from "../../pages";
@@ -65,6 +66,9 @@ function App() {
           </Route>
           <Route path="/add-article">
             <AddArticlePage />
+          </Route>
+          <Route path="/management-articles">
+            <ManagementArticlesPage />
           </Route>
           <Route path="/edit/:id">
             <EditArticlePage />

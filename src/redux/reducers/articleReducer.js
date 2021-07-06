@@ -67,20 +67,6 @@ export const {
   setErrorMessage,
 } = articleReducer.actions;
 
-export const getArticles = (pageNumber, articlesLimit) => async (dispatch) => {
-  dispatch(setIsLoading(true));
-
-  try {
-    const response = await getArticlesAPI(pageNumber, articlesLimit);
-    const data = await response.json();
-    dispatch(setArticles(data));
-    dispatch(setIsLoading(false));
-  } catch (error) {
-    console.log("錯誤：" + error);
-    dispatch(setIsLoading(false));
-  }
-};
-
 export const getAllArticles =
   (currentPage, articlesLimit) => async (dispatch) => {
     dispatch(setIsLoading(true));

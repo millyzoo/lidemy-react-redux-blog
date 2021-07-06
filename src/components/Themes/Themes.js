@@ -28,6 +28,7 @@ export const themes = {
       modify: "#0051c3",
       modifyBorder: "#ccc",
     },
+    border: "#D9D9D9",
     loading: {
       border: "rgba(0, 81, 195, 0.3)",
       focus: "#0051c3",
@@ -40,7 +41,7 @@ export const themes = {
       primary: "#313B41",
       searchBox: "#9cbfe2",
       opacity: "rgba(207, 224, 241, 0.02)",
-      category: "#687f8e",
+      category: "#86888a",
     },
     primary: "#82B1FF",
     text: {
@@ -62,6 +63,7 @@ export const themes = {
       submit: "#CFE0F1",
       modify: "#999",
     },
+    border: "#505050",
     loading: {
       border: "rgba(255, 255, 255, 0.2)",
       focus: "#fff",

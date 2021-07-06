@@ -77,7 +77,7 @@ const Overlay = styled.div`
 const CategoryDefault = styled.div`
   padding: 7px 45px 7px 15px;
   background-color: ${({ theme }) => theme.background.category};
-  border-radius: 3px;
+  border-radius: ${(props) => (props.isOpen ? "3px 3px 0 0" : "3px")};
   cursor: pointer;
 `;
 
@@ -278,7 +278,10 @@ export default function ArticlePage() {
             </Title>
             <CategoryContainer>
               <DownArrowIcon onClick={handleCategoriesClick} />
-              <CategoryDefault onClick={handleCategoriesClick}>
+              <CategoryDefault
+                onClick={handleCategoriesClick}
+                isOpen={isCategoriesOptionOpen}
+              >
                 文章類別
               </CategoryDefault>
               {isCategoriesOptionOpen && (
