@@ -47,12 +47,10 @@ const MenuBottomLine = styled.span`
 
 const HamburgerMenu = styled.div`
   position: relative;
-  margin-left: 30px;
+  margin-left: 20px;
   width: 50px;
   height: 50px;
-  background-color: ${({ theme }) => theme.button.menu};
   border-radius: 50%;
-  box-shadow: 0 0 30px rgba(0, 81, 195, 0.1);
   cursor: pointer;
   transition: 0.3s;
 
@@ -62,7 +60,7 @@ const HamburgerMenu = styled.div`
     transform: translateX(-50%);
     width: 25px;
     height: 2px;
-    background-color: #0051c3;
+    background-color: ${({ theme }) => theme.primary};
     transition: 0.3s;
   }
 
@@ -252,9 +250,14 @@ export default function Header() {
             文章列表
           </NavItem>
           {user && (
+            <>
+            <NavItem onClick={handleMenuClick} to="/add-article" replace>
+              新增文章
+            </NavItem>
             <NavItem onClick={handleMenuClick} to="/management-articles" replace>
               管理文章
             </NavItem>
+            </>
           )}
           {!user && (
             <NavItem onClick={handleMenuClick} to="/login" replace>

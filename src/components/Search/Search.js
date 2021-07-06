@@ -10,8 +10,8 @@ const SearchContainer = styled.form`
 `;
 
 const SearchBar = styled.input`
-  padding: 8px 10px 8px 20px;
-  width: 90px;
+  padding: 5px 10px 5px 15px;
+  width: 85px;
   background-color: ${({ theme }) => theme.background.searchBox};
   color: ${({ theme }) => theme.text.searchBox};
   border: transparent;
@@ -24,7 +24,7 @@ const SearchBar = styled.input`
 const SearchButton = styled.button`
   display: flex;
   align-items: center;
-  padding: 0 20px 0 0;
+  padding: 0 15px 0 0;
   background-color: ${({ theme }) => theme.background.searchBox};
   color: ${({ theme }) => theme.text.searchBox};
   border: transparent;
