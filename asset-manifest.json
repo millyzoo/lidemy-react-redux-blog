@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/lidemy-react-redux-blog/static/js/main.76e08f4d.chunk.js",
-    "main.js.map": "/lidemy-react-redux-blog/static/js/main.76e08f4d.chunk.js.map",
+    "main.js": "/lidemy-react-redux-blog/static/js/main.11de5515.chunk.js",
+    "main.js.map": "/lidemy-react-redux-blog/static/js/main.11de5515.chunk.js.map",
     "runtime-main.js": "/lidemy-react-redux-blog/static/js/runtime-main.98e5389a.js",
     "runtime-main.js.map": "/lidemy-react-redux-blog/static/js/runtime-main.98e5389a.js.map",
-    "static/js/2.4830d414.chunk.js": "/lidemy-react-redux-blog/static/js/2.4830d414.chunk.js",
-    "static/js/2.4830d414.chunk.js.map": "/lidemy-react-redux-blog/static/js/2.4830d414.chunk.js.map",
+    "static/js/2.a59d5095.chunk.js": "/lidemy-react-redux-blog/static/js/2.a59d5095.chunk.js",
+    "static/js/2.a59d5095.chunk.js.map": "/lidemy-react-redux-blog/static/js/2.a59d5095.chunk.js.map",
     "index.html": "/lidemy-react-redux-blog/index.html",
-    "static/js/2.4830d414.chunk.js.LICENSE.txt": "/lidemy-react-redux-blog/static/js/2.4830d414.chunk.js.LICENSE.txt",
+    "static/js/2.a59d5095.chunk.js.LICENSE.txt": "/lidemy-react-redux-blog/static/js/2.a59d5095.chunk.js.LICENSE.txt",
     "static/media/banner.5932d5ee.svg": "/lidemy-react-redux-blog/static/media/banner.5932d5ee.svg",
     "static/media/mode-toggle.50a03b8f.svg": "/lidemy-react-redux-blog/static/media/mode-toggle.50a03b8f.svg",
     "static/media/moon.ca5f9423.svg": "/lidemy-react-redux-blog/static/media/moon.ca5f9423.svg",
@@ -15,7 +15,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.98e5389a.js",
-    "static/js/2.4830d414.chunk.js",
-    "static/js/main.76e08f4d.chunk.js"
+    "static/js/2.a59d5095.chunk.js",
+    "static/js/main.11de5515.chunk.js"
   ]
 }
