@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/lidemy-react-redux-blog/static/js/main.d5290caa.chunk.js",
-    "main.js.map": "/lidemy-react-redux-blog/static/js/main.d5290caa.chunk.js.map",
+    "main.js": "/lidemy-react-redux-blog/static/js/main.ab66b6af.chunk.js",
+    "main.js.map": "/lidemy-react-redux-blog/static/js/main.ab66b6af.chunk.js.map",
     "runtime-main.js": "/lidemy-react-redux-blog/static/js/runtime-main.98e5389a.js",
     "runtime-main.js.map": "/lidemy-react-redux-blog/static/js/runtime-main.98e5389a.js.map",
     "static/js/2.a59d5095.chunk.js": "/lidemy-react-redux-blog/static/js/2.a59d5095.chunk.js",
@@ -16,6 +16,6 @@
   "entrypoints": [
     "static/js/runtime-main.98e5389a.js",
     "static/js/2.a59d5095.chunk.js",
-    "static/js/main.d5290caa.chunk.js"
+    "static/js/main.ab66b6af.chunk.js"
   ]
 }
