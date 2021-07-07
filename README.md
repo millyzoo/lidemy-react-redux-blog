@@ -3,12 +3,20 @@
 使用 [Create React App](https://github.com/facebook/create-react-app) 開發的 SPA Blog，並串接以 JSON server 建立的 [API](https://lidemy-blog-json-server.herokuapp.com) 。
 
 ☞ [DEMO](https://milyzoo.github.io/lidemy-react-redux-blog/)
+> 測試帳號： test <br>
+> 測試密碼：Lidemy
 
 ![](images/screenshots-main.png)
 
-## 功能
+## 目錄
+- [專案功能](#專案功能)
+- [使用技術](#使用技術)
+- [功能說明](#功能說明)
+- [運行專案](#運行專案)
 
-- 開放使用者註冊及登入功能
+## 專案功能
+
+- 開放使用者註冊及登入會員
 - 使用者在登入狀態下可以新增、編輯、刪除文章
 - 檢視所有文章功能，支援分頁功能，一頁顯示 5 篇，文章排序由新至舊排列
 - 點擊文章分類，即可篩選出該分類所有文章
@@ -19,12 +27,18 @@
 
 ## 使用技術
 
+### 前端
 - 以 React 開發，搭配 Redux 及 React-router
 - 使用 function component 並搭配 Hooks
 - 使用 Redux + Redux Toolkit 管理組件狀態
 - 使用 React-router 處理前端路由
 - 支援 RWD，使用 styled-components 進行排版
 - 搭配 Prettier、ESLint 統一程式碼格式
+
+### 後端
+Base URL: https://lidemy-blog-json-server.herokuapp.com
+- 使用 JSON server 建立 API
+- API 部署於 Heroku
 
 ## 功能說明
 
@@ -63,13 +77,13 @@
 
 ![](images/screenshots-mobile.gif)
 
-## Installation & 本機端啟動
+## 運行專案
 
 如果要在本機端啟動專案，需先安裝 Node.js 再進行以下步驟。
 
 ### 下載專案
 
-首先將專案下載至本機端。
+將專案下載至本機端。
 
 ```
 $ git clone https://github.com/milyzoo/lidemy-react-redux-blog.git
