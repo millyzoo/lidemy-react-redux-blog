@@ -33,7 +33,7 @@ const ArticleTitle = styled(Link)`
   font-weight: 500;
 
   ${MEDIA_QUERY_SM} {
-    font-size: 20px;
+    font-size: 18px;
   }
 `;
 
@@ -55,7 +55,7 @@ const ArticleFooter = styled.div`
 
   ${MEDIA_QUERY_SM} {
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 15px;
   }
 `;
 
@@ -70,7 +70,7 @@ const ReadMoreButton = styled(Link)`
     opacity: 0.8;
   }
   ${MEDIA_QUERY_SM} {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 `;
 
@@ -100,7 +100,7 @@ const ArticleInfoLink = styled.div`
   }
 `;
 
-const Author = styled(Link)`
+const Category = styled(Link)`
   text-decoration: none;
   color: ${({ theme }) => theme.text.second};
   transition: 0.3s;
@@ -130,9 +130,9 @@ export default function Article({ article }) {
           </ArticleDate>
           <ArticleInfoLink>
             <FolderIcon />
-            <Author to={`/category/${article.category}`}>
+            <Category to={`/category/${article.category}`}>
               {article.category}
-            </Author>
+            </Category>
           </ArticleInfoLink>
         </ArticleInfo>
       </ArticleFooter>
@@ -142,5 +142,4 @@ export default function Article({ article }) {
 
 Article.propTypes = {
   article: PropTypes.object,
-  showAuthor: PropTypes.bool,
 };

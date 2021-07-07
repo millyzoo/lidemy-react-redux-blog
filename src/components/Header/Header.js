@@ -163,8 +163,6 @@ const NavItem = styled(Link)`
   }
 
   ${MEDIA_QUERY_SM} {
-    font-size: 30px;
-
     & + & {
       margin-top: 30px;
     }

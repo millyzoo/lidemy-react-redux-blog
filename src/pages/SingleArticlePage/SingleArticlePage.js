@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { MEDIA_QUERY_SM } from "../../constants/breakpoint";
 import { Wrapper, Container, EmptyDataTitle } from "../../layout/mainLayout";
 import Loading from "../../components/Loading";
 import { getSingleArticle, deleteArticle } from "../../WebAPI";
@@ -15,6 +16,7 @@ import {
   AiOutlineDelete as DeleteIcon,
   AiOutlineCalendar as CalendarIcon,
   AiOutlineUser as PersonIcon,
+  AiOutlineFolder as FolderIcon,
 } from "react-icons/ai";
 
 const ArticleModify = styled.div`
@@ -74,9 +76,13 @@ const ArticleContainer = styled.div`
 
 const ArticleTitle = styled.div`
   margin-bottom: 5px;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 500;
   color: ${({ theme }) => theme.text.primary};
+
+  ${MEDIA_QUERY_SM} {
+    font-size: 18px;
+  }
 `;
 
 const ArticleInfo = styled.div`
@@ -105,19 +111,17 @@ const ArticleDate = styled.div`
   display: flex;
   align-items: center;
   color: ${({ theme }) => theme.text.second};
-  font-size: 17px;
 `;
 
-const ArticleAuthor = styled.div`
+const ArticleInfoDetail = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 30px;
+  margin-left: 20px;
 `;
 
-const Author = styled(Link)`
+const ArticleInfoLink = styled(Link)`
   text-decoration: none;
   color: ${({ theme }) => theme.text.second};
-  font-size: 17px;
   transition: 0.3s;
 
   &:hover {
@@ -193,13 +197,19 @@ export default function SingleArticlePage() {
                 {new Date(article.createdAt).toLocaleDateString()}
               </ArticleDate>
               {article.user && (
-                <ArticleAuthor>
+                <ArticleInfoDetail>
                   <PersonIcon />
-                  <Author to={`/author/${article.user.id}`}>
+                  <ArticleInfoLink to={`/author/${article.user.id}`}>
                     {article.user.nickname}
-                  </Author>
-                </ArticleAuthor>
+                  </ArticleInfoLink>
+                </ArticleInfoDetail>
               )}
+              <ArticleInfoDetail>
+                <FolderIcon />
+                <ArticleInfoLink to={`/category/${article.category}`}>
+                  {article.category}
+                </ArticleInfoLink>
+              </ArticleInfoDetail>
             </ArticleInfo>
             {article.coverImage && (
               <ArticleCoverImage src={article.coverImage} alt="Article Cover" />

@@ -75,6 +75,12 @@ const Description = styled.div`
     margin-top: 60px;
     width: 100%;
   }
+
+  ${MEDIA_QUERY_SM} {
+    h1 {
+      font-size: 28px;
+    }
+  }
 `;
 
 const DescriptionButton = styled(Link)`

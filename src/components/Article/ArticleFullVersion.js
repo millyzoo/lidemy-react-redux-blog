@@ -69,7 +69,7 @@ const ArticleTitle = styled(Link)`
   font-weight: 500;
 
   ${MEDIA_QUERY_SM} {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   @media (min-width: 576px) {

@@ -48,7 +48,7 @@ const RegisterForm = styled.form`
   position: relative;
   margin: 0 auto;
   width: 100%;
-  border-radius: 3px;
+  border-radius: 0 0 10px 10px;
   padding: 40px 40px 50px 40px;
   background-color: ${({ theme }) => theme.background.primary};
 
